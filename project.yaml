@@ -1,0 +1,21 @@
+name: floodspyweather-
+path: /agent/repos/floodspyweather-  # [INFERRED — confirm] path in this cloud workspace, not a laptop checkout
+repo: tobidontplay/floodspyweather-
+language: TypeScript
+run: npm run dev  # package-lock.json. Script is next dev.
+test: "TODO: confirm — no tests detected"  # no test script and no test files were found
+build: npm run build
+port: null  # next.config.mjs does not set a port
+env: .env.local
+watch:
+  - app
+  - components
+  - package.json
+auto_start: false
+auto_test: on-change
+features_dir: specs/features
+todo: TODO.md
+verification: docs/verification.md
+github:
+  enabled: true
+  ci: null
