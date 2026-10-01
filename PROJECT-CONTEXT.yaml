@@ -1,0 +1,468 @@
+# Ariadne project context. analysis_version 1.
+# Generated 2026-10-01 from a static audit. Runtime was not executed.
+# null means unknown or not recorded. [] means searched and empty.
+
+project: floodspyweather-
+purpose: >
+  Cyberpunk weather board: a Next.js client page with a Three.js sphere,
+  weather cards, news cards, a timeline, a simulated live feed, and particle rain.
+  The README calls this weather monitoring. The source uses inline fixtures and
+  Math.random(). No weather provider is named.
+stage: paused
+maturity: prototype
+last_analysis: "2026-10-01"
+confidence: medium
+analysis_version: 1
+
+goals:
+  stated:
+    - id: visual-board
+      text: Show a cyberpunk board with a globe, weather cards, news, a timeline, a live feed, and particle rain.
+      source: README.md
+      confidence: high
+    - id: visual-client-separate
+      text: Stay a visual client, separate from the floodspy report database.
+      source: docs/architecture/decisions/001-separate-visual-client.md
+      confidence: high
+    - id: name-or-confirm-data
+      text: Name the weather data source or confirm the panels are fixtures.
+      source: TODO.md
+      confidence: high
+    - id: confirm-fleet-and-port
+      text: Confirm the repo stays in the fleet and confirm the port.
+      source: TODO.md
+      confidence: high
+  inferred:
+    - id: fiction-demo
+      text: The 2077 cities and fixture copy are the product, and the real-time labels are costume.
+      source: CASE-STUDY.md plus inline data in app/page.tsx
+      confidence: low
+    - id: real-monitor
+      text: The board should monitor real floods.
+      source: README.md wording, contradicted by the absence of a fetch
+      confidence: low
+    - id: react-downgrade-intent
+      text: The May 2025 package.json edits were an attempt to satisfy react-day-picker peers.
+      source: commit messages d2c21b1 and 737c08e
+      confidence: medium
+  success_criteria:
+    - id: dev-renders-panels
+      text: npm run dev renders the globe, cards, news, timeline, feed, and rain.
+      source: specs/project-brief.md
+      met: null
+      confidence: low
+    - id: files-exist
+      text: The panel component files exist and the README lists them.
+      source: specs/features/001-weather-board.md
+      met: true
+      confidence: high
+    - id: provider-named-with-change
+      text: If a weather API is added, the project brief names it in the same change.
+      source: specs/project-brief.md
+      met: null
+      confidence: high
+    - id: verification-row
+      text: Shipped means a verification row with tests, manual check, and user opinion.
+      source: docs/verification.md
+      met: false
+      confidence: high
+  non_goals:
+    - id: flood-report-accounts
+      text: Flood report accounts and the sibling repo's database.
+      source: specs/project-brief.md
+      confidence: high
+    - id: invented-shared-api
+      text: Inventing a shared API with floodspy during a docs pass.
+      source: docs/architecture/decisions/001-separate-visual-client.md
+      confidence: high
+    - id: test-suite-brief
+      text: A test suite, listed as out of scope in the project brief.
+      source: specs/project-brief.md
+      confidence: high
+    - id: test-suite-todo
+      text: Tests, listed as someday in TODO.md. Conflicts with the brief.
+      source: TODO.md
+      confidence: high
+  target_user:
+    stated: A visitor watching the weather UI.
+    stated_source: specs/project-brief.md
+    stated_confidence: medium
+    account_system: null
+    operator_need: null
+
+capabilities:
+  - id: shell
+    name: Cyberpunk board shell
+    status: partial
+    confidence: high
+    evidence: app/page.tsx
+  - id: globe
+    name: 3D sphere with orbit controls and markers
+    status: partial
+    confidence: high
+    evidence: components/persistent-globe.tsx
+  - id: geography
+    name: Markers on real cities
+    status: absent
+    confidence: high
+    evidence: components/world-map.tsx
+  - id: globe-layers
+    name: Standard, weather, population, and risk layers
+    status: broken
+    confidence: high
+    evidence: components/globe-interface.tsx
+  - id: time-scale
+    name: Time slider as a forecast
+    status: partial
+    confidence: high
+    evidence: app/page.tsx
+  - id: globe-focus
+    name: Globe turns to face the selected city
+    status: broken
+    confidence: medium
+    evidence: components/world-map.tsx
+  - id: weather-cards
+    name: Weather alert cards
+    status: partial
+    confidence: high
+    evidence: app/page.tsx
+  - id: news
+    name: News archive
+    status: partial
+    confidence: high
+    evidence: components/news-card.tsx
+  - id: live-feed
+    name: Live updates
+    status: partial
+    confidence: high
+    evidence: components/live-feed.tsx
+  - id: timeline
+    name: Historical timeline
+    status: partial
+    confidence: high
+    evidence: components/timeline-viewer.tsx
+  - id: timeline-playback
+    name: Timeline play and speed
+    status: broken
+    confidence: high
+    evidence: components/timeline-viewer.tsx
+  - id: timeline-date-nav
+    name: Timeline date filter
+    status: broken
+    confidence: high
+    evidence: components/timeline-viewer.tsx
+  - id: particle-rain
+    name: Particle rain
+    status: partial
+    confidence: high
+    evidence: components/particle-rain.tsx
+  - id: location-detail
+    name: Per-city detail
+    status: partial
+    confidence: high
+    evidence: app/page.tsx
+  - id: location-history
+    name: Per-city history
+    status: partial
+    confidence: high
+    evidence: components/location-detail.tsx
+  - id: search
+    name: Search locations or events
+    status: partial
+    confidence: high
+    evidence: app/page.tsx
+  - id: chrome-actions
+    name: Notifications, settings, profile, sidebar tools
+    status: planned
+    confidence: high
+    evidence: components/sidebar.tsx
+  - id: toasts
+    name: Visible toast feedback
+    status: broken
+    confidence: high
+    evidence: app/layout.tsx
+  - id: data-provider
+    name: Named weather or news source
+    status: absent
+    confidence: high
+    evidence: docs/architecture/api.md
+  - id: persistence
+    name: Saved state across reload
+    status: absent
+    confidence: high
+    evidence: docs/architecture/data-model.md
+  - id: auth
+    name: Accounts
+    status: absent
+    confidence: high
+    evidence: docs/architecture/security.md
+  - id: http-api
+    name: HTTP API routes
+    status: absent
+    confidence: high
+    evidence: app/
+  - id: tests
+    name: Automated tests
+    status: absent
+    confidence: high
+    evidence: package.json
+  - id: ci-deploy
+    name: CI and deployment manifest
+    status: absent
+    confidence: high
+    evidence: project.yaml
+  - id: install-contract
+    name: Single dependency contract
+    status: broken
+    confidence: high
+    evidence: package.json
+  - id: theme
+    name: Theme provider
+    status: absent
+    confidence: high
+    evidence: components/theme-provider.tsx
+  - id: camera-report
+    name: Camera report
+    status: planned
+    confidence: high
+    evidence: components/live-feed.tsx
+  - id: article-view
+    name: Full article view
+    status: planned
+    confidence: high
+    evidence: components/news-card.tsx
+  - id: share
+    name: Share article
+    status: planned
+    confidence: high
+    evidence: components/news-card.tsx
+
+stack:
+  language: TypeScript
+  language_version: "5.8.3"
+  node: null
+  package_manager: npm
+  framework: Next.js
+  framework_version: "15.2.4"
+  react_declared: "^18.2.0"
+  react_locked: "19.1.0"
+  date_fns_declared: "^3.0.0"
+  date_fns_locked: "4.1.0"
+  three: "0.175.0"
+  react_three_fiber: "9.1.2"
+  react_three_drei: "10.0.6"
+  gsap: "3.12.7"
+  tailwind: "3.4.17"
+  ui_kit: shadcn/radix
+  test_runner: null
+  linter: null
+  ci: null
+  port: null
+  env_file_named: .env.local
+  env_vars_read: []
+  native_deps_declared_unused:
+    - expo
+    - expo-asset
+    - expo-file-system
+    - expo-gl
+    - react-native
+
+architecture:
+  pattern: single-page client component
+  entry: app/page.tsx
+  layout: app/layout.tsx
+  router: app
+  rendering: client
+  server_data: null
+  database: null
+  api: null
+  auth: null
+  state: react-usestate-and-module-constants
+  mounted_globe: components/persistent-globe.tsx
+  unmounted_globe: components/globe-interface.tsx
+  routes:
+    - path: /
+      file: app/page.tsx
+      methods: []
+  external_services: []
+  sibling_repo: tobidontplay/floodspy
+  sibling_shared_database: false
+
+risks:
+  - id: unnamed-data-source
+    severity: high
+    summary: Screen copy says real-time monitoring. Data is fixtures and Math.random(). The TODO still asks for a decision.
+    evidence: TODO.md
+    confidence: high
+  - id: split-install-contract
+    severity: high
+    summary: package.json asks for React 18 and date-fns 3. The lockfile resolves React 19.1.0 and date-fns 4.1.0. Fiber 9 peers React 19. react-day-picker 8 peers React 18 and is unused.
+    evidence: package-lock.json
+    confidence: high
+  - id: controls-do-not-match-labels
+    severity: high
+    summary: Timeline playback, date filtering, toasts, and globe layer buttons do not perform the action the control names.
+    evidence: components/timeline-viewer.tsx
+    confidence: high
+  - id: build-ignores-errors
+    severity: medium
+    summary: next build is configured to ignore TypeScript and ESLint errors. There is no test script and no CI workflow.
+    evidence: next.config.mjs
+    confidence: high
+  - id: stale-architecture-doc
+    severity: medium
+    summary: The overview diagram points at globe-interface.tsx, which the page does not import.
+    evidence: docs/architecture/overview.md
+    confidence: high
+  - id: double-webgl-canvas
+    severity: low
+    summary: Two PersistentGlobe trees mount and CSS hides one. Context loss on a real GPU was not observed.
+    evidence: app/page.tsx
+    confidence: medium
+  - id: animation-frame-leak
+    severity: low
+    summary: Particle rain cleanup does not cancel requestAnimationFrame.
+    evidence: components/particle-rain.tsx
+    confidence: high
+  - id: fleet-paused
+    severity: medium
+    summary: Audit brief says the Ariadne fleet status is paused. The repo does not store that field. auto_start is false.
+    evidence: project.yaml
+    confidence: medium
+
+decisions:
+  - id: adr-001
+    title: Weather UI stays a separate repo from FloodSpy reports
+    status: accepted
+    date: "2026-09-25"
+    source: docs/architecture/decisions/001-separate-visual-client.md
+    consequence: Do not point project.yaml at FloodSpy Supabase.
+  - id: fixtures-inline
+    title: Panel data is written in the components
+    status: implicit
+    date: "2025-05-03"
+    source: app/page.tsx
+    consequence: There is no single provider module. Populations differ between the globe and the detail view.
+  - id: ignore-build-errors
+    title: next build ignores TypeScript and ESLint failures
+    status: implicit
+    date: "2025-05-03"
+    source: next.config.mjs
+    consequence: A successful build is not a typecheck.
+  - id: feature-done-means-files
+    title: feat-001 acceptance is file existence
+    status: recorded
+    date: "2026-09-25"
+    source: specs/features/001-weather-board.md
+    consequence: stage implemented is compatible with an empty verification log.
+
+open_questions:
+  - id: stay-in-fleet
+    text: Does this repo stay in the fleet?
+    blocking: true
+    confidence: low
+  - id: fixtures-or-provider
+    text: Are the panels fixtures on purpose, or is a provider still required?
+    blocking: true
+    confidence: low
+  - id: merge-with-floodspy
+    text: Should this repo merge with tobidontplay/floodspy?
+    blocking: false
+    confidence: low
+  - id: which-react
+    text: Which React major is the contract, 18 as in package.json or 19 as in the lockfile?
+    blocking: true
+    confidence: low
+  - id: keep-expo
+    text: Should the unused Expo and React Native dependencies stay?
+    blocking: false
+    confidence: low
+  - id: port
+    text: What port should project.yaml record?
+    blocking: false
+    confidence: low
+  - id: tests-in-scope
+    text: Is a test suite in scope? The brief and the TODO disagree.
+    blocking: false
+    confidence: low
+  - id: which-globe
+    text: Should the mounted globe remain PersistentGlobe, or should GlobeInterface replace it?
+    blocking: false
+    confidence: low
+  - id: target-visitor
+    text: Is the visitor a portfolio reader or someone who needs flood information?
+    blocking: true
+    confidence: low
+
+roadmap:
+  now:
+    - Confirm fleet membership.
+    - Name the data source or confirm fixtures.
+    - Confirm the port.
+    - Choose the React contract and regenerate the lockfile in that same change.
+  next:
+    - If the repo stays, write the provider decision into docs/architecture/api.md.
+    - Mount the toast renderer or stop calling toast.
+    - Point the architecture diagram at persistent-globe.tsx.
+  someday:
+    - Tests, if the owner puts them in scope.
+    - Timeline playback that advances a date.
+    - One globe instance, chosen with a render condition.
+  source: TODO.md
+  inferred_items_included: true
+
+links:
+  readme: README.md
+  agents: AGENTS.md
+  case_study: CASE-STUDY.md
+  todo: TODO.md
+  changelog: CHANGELOG.md
+  project_yaml: project.yaml
+  brief: specs/project-brief.md
+  feature: specs/features/001-weather-board.md
+  adr: docs/architecture/decisions/001-separate-visual-client.md
+  overview: docs/architecture/overview.md
+  api_doc: docs/architecture/api.md
+  data_model: docs/architecture/data-model.md
+  tech_stack: docs/architecture/tech-stack.md
+  verification: docs/verification.md
+  state: PROJECT-STATE.md
+  goals: PROJECT-GOALS.md
+  gap: PROJECT-GAP.md
+  teach: PROJECT-TEACH.md
+  page: app/page.tsx
+  globe: components/world-map.tsx
+  repo: tobidontplay/floodspyweather-
+  sibling: tobidontplay/floodspy
+  last_app_commit: d2c21b131bbd3a54d80456c20d60b509945e1ab8
+  last_commit: f137f451ef8094fa938c0c447b7f95b5af5b4332
+
+teaching_hooks:
+  - id: files-are-not-behavior
+    audience: owner
+    hook: The feature spec can say Done while the play button only changes an icon.
+    concept: Acceptance criteria have to name a behavior, not a filename.
+  - id: two-manifests
+    audience: owner
+    hook: Two commits say the dependency conflict is fixed, and the lockfile still records the old React.
+    concept: package.json and package-lock.json are both the contract. A one-file edit leaves the install on the previous resolution.
+  - id: live-is-a-timer
+    audience: owner
+    hook: The feed says Connected because the JSX says Connected.
+    concept: A component name and a status dot are not a network.
+  - id: use-frame-wins
+    audience: owner
+    hook: GSAP aims the globe, and the render loop assigns rotation from elapsed time on the next frame.
+    concept: Two writers on one property. The absolute assignment is the steady state.
+  - id: optional-peers
+    audience: agent
+    hook: Expo is in package.json because fiber lists it as an optional peer, and the page never imports it.
+    concept: Read peerDependenciesMeta before treating a native package as part of a website.
+  - id: diagram-drift
+    audience: agent
+    hook: The architecture diagram points at the globe file the page does not import.
+    concept: Trace the import from the route before editing the file the doc names.
+  - id: random-city
+    audience: tutor
+    hook: Click the same city twice and the population changes.
+    concept: Math.random() in render-adjacent effects is not a data model.
